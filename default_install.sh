@@ -2,10 +2,10 @@
 password=$(zenity --password)
 
 # update password
-echo $password | sudo -S apt upgrade
+echo $password | sudo -S apt-get update
 
 # install apt repositories
-sudo apt install -y \
+sudo apt-get install -y \
   xclip \
   terminator \
   zsh \
@@ -15,6 +15,7 @@ sudo apt install -y \
   php-zip \
   php-intl \
   php-mbstring \
+  php-xml \
   composer \
   nodejs \
   npm \
@@ -28,13 +29,10 @@ wget -O slack.deb $slack # downlod file
 sudo dpkg -i slack.deb # install
 unlink slack.deb # delete installer
 
-# install oh my zsh
-sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
 # install anydesk
-wget -qO - https://keys.anydesk.com/repos/DEB-GPG-KEY | apt-key add - # add repo key
-echo "deb http://deb.anydesk.com/ all main" > /etc/apt/sources.list.d/anydesk-stable.list # add repo
-sudo apt update # update apt cache
+wget -qO - https://keys.anydesk.com/repos/DEB-GPG-KEY | sudo apt-key add - # add repo key
+sudo sh -c "echo 'deb http://deb.anydesk.com/ all main' > /etc/apt/sources.list.d/anydesk-stable.list" # add repo
+sudo apt-get update # update apt cache
 sudo apt install anydesk # install anydesk
 
 # install jetbrain toolbox
@@ -44,3 +42,6 @@ cd /opt/jetbrains-toolbox-1.20.7940 && ./jetbrains-toolbox # install toolbox
 cd - # go back
 unlink jetbrains-toolbox.tar.gz # delete installer
 zenity --info --text="continue to install program like phpstorm, etc... from the jetbrain toolbox window." --width=200 --height=100 # user message continue to manually install
+
+# install oh my zsh
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
