@@ -19,7 +19,7 @@ sudo apt-get install -y \
   composer \
   nodejs \
   npm \
-  yarn \
+  yarnpkg \
   curl \
   wget
 
