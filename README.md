@@ -4,5 +4,5 @@
 
 ```shell
 chmod +x ./default_install.sh
-./default_install.sh
+sudo ./default_install.sh
 ```
