@@ -1,9 +1,9 @@
+# Working DIR
 WD=$(pwd);
 
-# update password
-apt-get update
-
-apt-get update && apt-get install -y \
+# APT repositories installation
+apt-get update || exit
+apt-get install -y \
 	libzip-dev \
 	libxml2-dev \
 	libonig-dev \
@@ -34,7 +34,7 @@ apt-get update && apt-get install -y \
   php-curl \
   php-opcache \
   php-apcu \
-  php-curl
+  php-curl || exit
 
 # PHP PECL cases
 RUN pecl install apcu
