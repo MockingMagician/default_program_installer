@@ -1,9 +1,10 @@
 # Working DIR
 WD=$(pwd);
+export DEBIAN_FRONTEND=noninteractive
 
 # APT repositories installation
 apt-get update || exit
-apt-get install -y \
+apt-get install -yq \
 	libzip-dev \
 	libxml2-dev \
 	libonig-dev \
@@ -26,20 +27,22 @@ apt-get install -y \
   php-xml \
   php-intl \
   php-mbstring \
-  php-pcntl \
   php-bcmath \
   php-fileinfo \
   php-pdo \
-  php-pdo_mysql \
   php-curl \
   php-opcache \
   php-apcu \
   php-curl || exit
 
+#  php-pcntl \
+#  php-pdo_mysql \
+
 # PHP PECL cases
-RUN pecl install apcu
-RUN docker-php-ext-enable apcu
-RUN pecl clear-cache
+pecl install apcu
+pecl install xdebug
+#docker-php-ext-enable apcu
+pecl clear-cache
 
 # Yarn case
 apt-get remove -y cmdtest
